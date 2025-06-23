@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Referral Earnings</title>
+
+  <!-- ✅ Open Graph Tags for Social Sharing -->
+  <meta property="og:title" content="🎁 Join & Earn $5 - Invite Your Friends!" />
+  <meta property="og:description" content="Share your referral link and earn $5 for every 5 referrals. Click to start earning now!" />
+  <meta property="og:image" content="https://yourdomain.com/assets/share2earn-banner.png" />
+  <meta property="og:url" content="https://your-website.com" />
+  <meta property="og:type" content="website" />
+
+  <!-- Bootstrap + Style -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container {
+      max-width: 600px;
+      margin-top: 50px;
+      background-color: #1f1f1f;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    }
+    .btn-custom {
+      background-color: #28a745;
+      color: white;
+    }
+    .referral-section {
+      margin-top: 30px;
+    }
+    .info-text {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container text-center">
+    <h2>🎁 Earn by Sharing!</h2>
+    <p>Get $5 after every 5 referrals. Share your unique link now.</p>
+
+    <div class="referral-section">
+      <p><strong>Your Referral Link:</strong></p>
+      <input id="refLink" type="text" class="form-control text-center mb-2" readonly>
+      <button onclick="copyReferral()" class="btn btn-secondary mb-3">📋 Copy Link</button>
+      <p class="info-text">Copy the referral code, share to your social media and come back for your earnings!</p>
+    </div>
+
+    <div>
+      <p><strong>Referrals:</strong> <span id="clicks">0</span></p>
+      <p><strong>Earnings:</strong> $<span id="earnings">0</span></p>
+    </div>
+
+    <button onclick="withdraw()" class="btn btn-custom mt-3">Withdraw</button>
+    <p id="withdraw-msg" class="text-success mt-2 hidden">✅ Withdrawal Requested!</p>
+  </div>
+
+  <script>
+    const domain = "https://your-website.com"; // Replace with your actual domain
+    const referralLink = `${domain}?ref=${generateId()}`;
+
+    function generateId() {
+      return localStorage.getItem("refID") || createId();
+    }
+
+    function createId() {
+      const id = Math.random().toString(36).substring(2, 8);
+      localStorage.setItem("refID", id);
+      return id;
+    }
+
+    document.getElementById("refLink").value = referralLink;
+
+    function copyReferral() {
+      const copyText = document.getElementById("refLink");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("Referral link copied!");
+    }
+
+    function updateDashboard() {
+      const clicks = parseInt(localStorage.getItem("clicks") || "0");
+      const earnings = Math.floor(clicks / 5) * 5;
+      document.getElementById("clicks").innerText = clicks;
+      document.getElementById("earnings").innerText = earnings;
+    }
+
+    function simulateClick() {
+      let clicks = parseInt(localStorage.getItem("clicks") || "0");
+      clicks++;
+      localStorage.setItem("clicks", clicks);
+      updateDashboard();
+    }
+
+    function withdraw() {
+      const clicks = parseInt(localStorage.getItem("clicks") || "0");
+      if (clicks >= 5) {
+        document.getElementById("withdraw-msg").classList.remove("hidden");
+      } else {
+        alert("You need at least 5 referrals to withdraw.");
+      }
+    }
+
+    updateDashboard();
+
+    // Simulate referrals by counting page loads
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("ref")) {
+      simulateClick();
+    }
+  </script>
+</body>
+</html>
