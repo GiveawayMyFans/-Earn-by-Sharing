@@ -1,79 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Referral Earnings</title>
-
-  <!-- ✅ Open Graph Tags for Social Sharing -->
-  <meta property="og:title" content="🎁 Join & Earn $5 - Invite Your Friends!" />
-  <meta property="og:description" content="Share your referral link and earn $5 for every 5 referrals. Click to start earning now!" />
-  <meta property="og:image" content="https://yourdomain.com/assets/share2earn-banner.png" />
-  <meta property="og:url" content="https://your-website.com" />
-  <meta property="og:type" content="website" />
-
-  <!-- Bootstrap + Style -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Langapay Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background-color: #121212;
-      color: #ffffff;
+      background-color: #f8f9fa;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .container {
-      max-width: 600px;
-      margin-top: 50px;
-      background-color: #1f1f1f;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .btn-custom {
-      background-color: #28a745;
-      color: white;
+    .balance {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #198754;
     }
-    .referral-section {
-      margin-top: 30px;
+    .referral-section input {
+      text-align: center;
     }
-    .info-text {
-      font-size: 14px;
-      color: #ccc;
+    .referral-count, .earnings {
+      font-size: 1.2rem;
     }
-    .hidden {
-      display: none;
+    .btn-copy {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <center><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhMJDe_QVEGcClV4EO0aDCVJ4xDvr_KS-CDb6fpzcikJxKVL_iEWoiP3Ye9IDpC3xMGW7ad3fPx7RFjDqdoVGm5kgJ1HF-I3uon_mZU39G6ANxj5RsBiBAyDL7Byqqi5_aZcBLDzovyt9C3ZHu1AJlhCQRflJxrdKD6rjzswN6AO9wXTDRBfk6oImXemU/s320/WhatsApp%20Image%202025-06-23%20at%2008.39.03_2df9a9d5.jpg" alt="Logo" width="400rem" /></center>
-   
-  <div class="container text-center">
-    <h2>Share2Earn!</h2>
-    <p>Get $5 after every 5 referrals. Share your unique link now.</p>
+  <div class="container py-4">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">Langapay Dashboard</h2>
+      <p>Track your referrals and earnings.</p>
+    </div><div class="card p-4 mb-3">
+  <h5>Account Balance</h5>
+  <p class="balance">$<span id="earnings">0</span></p>
+</div>
 
-    <div class="referral-section">
-      <p><strong>Your Referral Link:</strong></p>
-      <input id="refLink" type="text" class="form-control text-center mb-2" readonly>
-      <button onclick="copyReferral()" class="btn btn-secondary mb-3">📋 Copy Link</button>
-      <p class="info-text">Copy the referral code, share to 5 people on whatsApp and come back for your earnings!</p>
-    </div>
-
-    <div>
-      <p><strong>Referrals:</strong> <span id="clicks">0</span></p>
-      <p><strong>Earnings:</strong> $<span id="earnings">0</span></p>
-    </div>
-
-    <a href="https://otieu.com/4/9048439" target="_blank">
-    <button onclick="withdraw()" class="btn btn-custom mt-3">Withdraw</button>
-      </a>
-    <p id="withdraw-msg" class="text-success mt-2 hidden">✅ Withdrawal Requested!</p>
+<div class="card p-4 mb-3">
+  <h5>Your Referral Link</h5>
+  <div class="referral-section">
+    <input type="text" id="refLink" class="form-control mb-2" readonly>
+    <button class="btn btn-primary btn-copy" onclick="copyReferral()">Copy Link</button>
+    <p class="mt-2">Share this link with your friends. Earn $5 for every 5 referrals!</p>
   </div>
-  <center><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjszuEa827k5hJQ2rDaug8HSX5hpekcKA-KgnslygRppX-AWcPeYtZuqao8Iwwfv1GFSmqVf7X4TuPCVqs6yRnTGZNjsGoxvndcH-8nYlybNbVqZbYgEtkzcpYApCqRRN3smKLatz7Ek-BexJUfQVDFf0wOqRBPGXa2krHHheuV_HRnKJSKGwsCuMVQof0/s320/WhatsApp%20Image%202025-06-23%20at%2017.46.53_48837fd6.jpg" alt="Logo" width="400rem" /></center>
-   
+</div>
 
-  <script>
-    const domain = "💸 Wanna make money online? Just share your link and earn $5 for every 5 people that click! No registration needed. Start earning now! 🔥 👉 https://bit.ly/3TzSVr0 "; // Replace with your actual domain
-    const referralLink = `${domain}?ref=${generateId()}`;
+<div class="card p-4">
+  <p class="referral-count">Referrals: <span id="clicks">0</span></p>
+  <button class="btn btn-success" onclick="withdraw()">Withdraw</button>
+  <p id="withdraw-msg" class="text-success mt-2 d-none">Withdrawal Requested!</p>
+</div>
+
+  </div>  <script>
+    const domain = "https://waymyfans.github.io"; // Replace with your domain if different
 
     function generateId() {
       return localStorage.getItem("refID") || createId();
@@ -85,6 +68,7 @@
       return id;
     }
 
+    const referralLink = ${domain}?ref=${generateId()};
     document.getElementById("refLink").value = referralLink;
 
     function copyReferral() {
@@ -112,7 +96,7 @@
     function withdraw() {
       const clicks = parseInt(localStorage.getItem("clicks") || "0");
       if (clicks >= 5) {
-        document.getElementById("withdraw-msg").classList.remove("hidden");
+        document.getElementById("withdraw-msg").classList.remove("d-none");
       } else {
         alert("You need at least 5 referrals to withdraw.");
       }
@@ -120,11 +104,9 @@
 
     updateDashboard();
 
-    // Simulate referrals by counting page loads
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("ref")) {
       simulateClick();
     }
-  </script>
-</body>
+  </script></body>
 </html>
